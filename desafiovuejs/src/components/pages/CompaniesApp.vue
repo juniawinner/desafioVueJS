@@ -1,7 +1,7 @@
 <template>
     <div class="grid m-6">
         <h1>Empresas</h1>
-        <p class="m-4 lg:m-6">Conheça as principais empresas de Tecnologia</p>
+        <p class="m-4 lg:m-6">Conheça as principais empresas de Tecnologia.</p>
 
         <section v-if="errored">
             <article class="text-center p-2 bg-pink-200 border-none rounded-md">
