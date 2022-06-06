@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="grid m-6">
         <h1>Empresas</h1>
-        <p><strong>Conheça as principais empresas de Tecnologia</strong></p>
+        <p class="m-4 lg:m-6">Conheça as principais empresas de Tecnologia</p>
 
         <section v-if="errored">
-            <article>
-                <h2>Ops! Ocorreu um erro no servidor Web ☹️</h2>
+            <article class="text-center p-2 bg-pink-200 border-none rounded-md">
+                <h3>Ops! Ocorreu um erro no servidor Web ☹️</h3>
                 <p>Pedimos desculpas, não estamos conseguindo recuperar as informações no momento.</p>
                 <p>Por favor, tente novamente mais tarde.</p>
             </article>
@@ -13,26 +13,26 @@
 
         <section v-else>
             <div v-if="loading">
-                <h2>Carregando...</h2>
+                <h3>Carregando...</h3>
             </div>
 
             <div v-else>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Empresa</th>
-                            <th>Categoria</th>
-                            <th>País-sede</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="company in data" :key="company.id">
-                            <td><a :href="company.link">{{ company.name }}</a></td>
-                            <td>{{ company.category }}</td>
-                            <td>{{ company.country }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <ul>
+                    <li v-for="company in data" :key="company.id">
+                        <span class="text-blue-800 underline">
+                            <a :href="company.site">{{ company.name }}</a>
+                        </span>
+                        <span>{{ company.category }}</span>
+                        <span>{{ company.country }}</span>
+                        <span class="hover:bg-sky-600">
+                            <a :href="company.linkedin" :title="company.name">
+                                <img class="h-10 w-auto"
+                                    src="https://ik.imagekit.io/x4ikoq975/%C3%ADcones/linkedin_4KBmvLHyp.png?ik-sdk-version=javascript-1.4.3&updatedAt=1653574797154"
+                                    alt="Logo do LinkedIn" />
+                            </a>
+                        </span>
+                    </li>
+                </ul>
             </div>
         </section>
 

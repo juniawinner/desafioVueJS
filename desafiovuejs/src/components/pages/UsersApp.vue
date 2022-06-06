@@ -3,8 +3,8 @@
   <div class="px-4 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-center">
       <div class="sm:flex-auto">
-        <h1 class="text-xl font-semibold text-gray-900">Usuários</h1>
-        <p class="mt-2 text-sm text-gray-700">Lista de usuários cadastros no sistema.</p>
+        <h1>Usuários</h1>
+        <p>Lista de usuários cadastros no sistema.</p>
       </div>
       <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
         <button type="button" class="inline-flex items-center justify-center rounded-md border border-transparent 
@@ -21,25 +21,27 @@
             <table class="min-w-full divide-y divide-gray-300">
               <thead class="bg-gray-50">
                 <tr>
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Nome</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Nome
+                  </th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Empresa</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">E-mail</th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Data de cadastro</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Data de cadastro
+                  </th>
                   <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                     <span class="sr-only">Edit</span>
                   </th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200 bg-white">
-                <tr     >
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{  }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{  }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{  }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{  }}</td>
+                <tr v-for="person in users" :key="person.email">
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                    {{ person.name }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ person.company }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ person.email }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ person.data }}</td>
                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                      >Editar<span class="sr-only">, {{  }}</span></a
-                    >
+                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Editar
+                      <span class="sr-only">, {{ person.name }}</span></a>
                   </td>
                 </tr>
               </tbody>
@@ -54,4 +56,19 @@
 
 
 <script setup>
+import { onMounted, ref } from 'vue';
+
+const users = ref([])
+
+onMounted(() => {
+  users.value = [
+    { name: 'Fulano da Silva', company: 'E-Inov Soluções Tecnológicas', email: 'fulano.silva@example.com', data: '2022-01-05' },
+    { name: 'Fulano da Silva 2', company: 'E-Inov Soluções Tecnológicas', email: 'fulano.silva2@example.com', data: '2022-01-16' },
+    { name: 'Fulano da Silva 3', company: 'E-Inov Soluções Tecnológicas', email: 'fulano.silva3@example.com', data: '2022-01-27' },
+    { name: 'Fulano da Silva 4', company: 'E-Inov Soluções Tecnológicas', email: 'fulano.silva4@example.com', data: '2022-02-09' },
+  ]
+})
 </script>
+
+<style scoped>
+</style>
