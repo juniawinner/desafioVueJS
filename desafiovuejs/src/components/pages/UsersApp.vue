@@ -6,102 +6,47 @@
 
       <ul>
         <li v-for="person in users" :key="person.email">
-          <span class="font-semibold">{{ person.name }}</span>
-          <span class="text-xs lg:text-base italic">{{ person.company }}</span>
-          <span class="text-xs lg:text-base">{{ person.email }}</span>
-          <span class="text-xs lg:text-base">{{ person.telephone }}</span>
-          <span class="text-xs lg:text-base">{{ person.data }}</span>
-          <span>
-            <button class="bg-indigo-600" type="button">Editar</button>
-          </span>
+
+          <textarea name="name" cols="20" rows="2" minlength="10" maxlength="30" :disabled="value" v-model="person.name"
+            class="text-xs lg:text-base font-medium border-none rounded-md"></textarea>
+
+          <textarea name="company" cols="20" rows="2" minlength="10" maxlength="30" :disabled="value"
+            v-model="person.company" class="text-xs lg:text-base italic border-none rounded-md"></textarea>
+
+          <textarea name="email" cols="20" rows="2" minlength="10" maxlength="30" :disabled="value"
+            v-model="person.email" class="text-xs lg:text-base border-none rounded-md"></textarea>
+
+          <textarea name="telephone" cols="20" rows="2" minlength="10" maxlength="30" :disabled="value"
+            v-model="person.telephone" class="text-xs lg:text-base border-none rounded-md"></textarea>
+
+          <textarea name="data" cols="20" rows="2" minlength="10" maxlength="30" :disabled="value" v-model="person.data"
+            class="text-xs lg:text-base border-none rounded-md"></textarea>
+
+          <button class="bg-indigo-600" type="button" @click="value = false, warning = true"
+            @mouseup="message = `Salvar`" @dblclick="value = true, warning = false, message = `Editar`">
+            {{ message }}
+          </button>
+
+          <small class="text-xs lg:text-base font-mono text-pink-800" v-show="warning">
+            Clique duas vezes no botão para salvar as alterações.
+          </small>
         </li>
       </ul>
     </section>
 
-    <hr class="my-10 mx-6 border-2 border-fuchsia-900 w-auto">
+    <hr class="my-11 mx-6 border border-indigo-700">
 
-    <section class="grid">
-      <h2>Novos Usuários</h2>
-      <p class="m-4 lg:m-6">Formulário para cadastramento no sistema.</p>
-
-      <form @submit="indexedDB" class="grid grid-cols-2 m-2 p-1 gap-2">
-        <div class="grid auto-rows-min">
-          <label for="user-name" class="grid gap-1">
-            <span class="text-sm font-medium text-slate-800">Nome:</span>
-            <div class="grid grid-cols-[5fr_1fr]">
-              <input id="user-name" name="user-name" type="text" v-model="new_name" placeholder="Canção da Silva"
-                pattern="^[^-\s][a-zA-ZÀ-ú ]*"
-                class="peer w-full px-3 py-2 placeholder:text-xs placeholder-slate-500 bg-white border border-slate-600 rounded-md text-sm shadow-sm 
-                focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 
-                invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500">
-              <p class="m-1 invisible peer-invalid:visible text-pink-800 text-sm">
-                ❌
-              </p>
-            </div>
-            <small>Apenas letras e acentos.</small>
-          </label>
-        </div>
-
-        <div class="grid auto-rows-min">
-          <label for="user-email" class="grid gap-1">
-            <span class="text-sm font-medium text-slate-800">E-mail:</span>
-            <div class="grid grid-cols-[5fr_1fr]">
-              <input id="user-email" name="user-email" type="email" v-model="new_email" placeholder="exemplo@gmail.com"
-                class="peer w-full px-3 py-2 placeholder:text-xs placeholder-slate-500 bg-white border border-slate-600 rounded-md text-sm shadow-sm 
-                focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 
-                invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500">
-              <p class="m-1 invisible peer-invalid:visible text-pink-800 text-sm">
-                ❌
-              </p>
-            </div>
-            <small>Obrigatório colocar "@".</small>
-          </label>
-        </div>
-
-        <div class="grid auto-rows-min">
-          <label for="user-telephone" class="grid gap-1">
-            <span class="text-sm font-medium text-slate-800">Telefone:</span>
-            <div class="grid grid-cols-[5fr_1fr]">
-              <input id="user-telephone" name="user-telephone" type="tel" v-model="new_telephone"
-                placeholder="83-1234-5678" pattern="[0-9]{2}-[0-9]{4}-[0-9]{4}"
-                class="peer w-full px-3 py-2 placeholder:text-xs placeholder-slate-500 bg-white border border-slate-600 rounded-md text-sm shadow-sm 
-                focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 
-                invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500">
-              <p class="m-1 invisible peer-invalid:visible text-pink-800 text-sm">
-                ❌
-              </p>
-            </div>
-            <small>Formato: DDD-xxxx-xxxx</small>
-          </label>
-        </div>
-
-        <div class="grid auto-rows-min">
-          <label for="user-company" class="grid gap-1">
-            <span class="text-sm font-medium text-slate-800">Empresa:</span>
-            <div class="grid grid-cols-[5fr_1fr]">
-              <input id="user-company" name="user-company" type="text" v-model="new_company"
-                placeholder="Inovação Tech10" pattern="^[^-\s][a-zA-ZÀ-ú0-9 ]*"
-                class="peer w-full px-3 py-2 placeholder:text-xs placeholder-slate-500 bg-white border border-slate-600 rounded-md text-sm shadow-sm 
-                focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 
-                invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500">
-              <p class="m-1 invisible peer-invalid:visible text-pink-800 text-sm">
-                ❌
-              </p>
-            </div>
-            <small>Aceita letras, acentos e números.</small>
-          </label>
-        </div>
-
-        <button class="bg-indigo-600" type="submit">
-          Cadastrar
-        </button>
-      </form>
-    </section>
+    <UsersNewApp />
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue';
+import UsersNewApp from './UsersNewApp.vue';
+
+let value = ref(true)
+let warning = ref(false)
+let message = ref('Editar')
 
 const users = ref([])
 
