@@ -6,7 +6,6 @@
     <ul>
       <!-- Lista de usuários salvos no código do projeto Vue.JS (código fonte) -->
       <li v-for="person in users" :key="person.email">
-
         <textarea name="name" cols="20" rows="2" minlength="10" maxlength="30" :disabled="value" v-model="person.name"
           class="text-xs lg:text-base font-medium border-none rounded-md"></textarea>
 
@@ -19,17 +18,8 @@
         <textarea name="telephone" cols="20" rows="2" minlength="10" maxlength="30" :disabled="value"
           v-model="person.telephone" class="text-xs lg:text-base border-none rounded-md"></textarea>
 
-        <textarea name="data" cols="20" rows="2" minlength="10" maxlength="30" :disabled="value" v-model="person.data"
+        <textarea name="date" cols="20" rows="2" minlength="10" maxlength="30" :disabled="value" v-model="person.date"
           class="text-xs lg:text-base border-none rounded-md"></textarea>
-
-        <button class="bg-indigo-600" type="button" @click="value = false, warning = true" @mouseup="message = `Salvar`"
-          @dblclick="value = true, warning = false, message = `Editar`">
-          {{ message }}
-        </button>
-
-        <small class="text-xs lg:text-base font-mono text-pink-800" v-show="warning">
-          Clique duas vezes no botão para salvar as alterações.
-        </small>
       </li>
 
       <!-- Lista de usuários salvos no Local Storage do Navegador (lado do cliente) -->
@@ -46,16 +36,19 @@
         <textarea name="telephone" cols="20" rows="2" minlength="10" maxlength="30" :disabled="value"
           v-model="t.telephoneForm" class="text-xs lg:text-base border-none rounded-md"></textarea>
 
-        <button class="bg-indigo-600" type="button" @click="value = false, warning = true" @mouseup="message = `Salvar`"
-          @dblclick="value = true, warning = false, message = `Editar`">
-          {{ message }}
-        </button>
-
-        <small class="text-xs lg:text-base font-mono text-pink-800" v-show="warning">
-          Clique duas vezes no botão para salvar as alterações.
-        </small>
+        <textarea name="date" cols="20" rows="2" minlength="10" maxlength="30" :disabled="value" v-model="t.currentDate"
+          class="text-xs lg:text-base border-none rounded-md"></textarea>
       </li>
     </ul>
+
+    <button class="bg-indigo-600" type="button" @click="value = false, warning = true" @mouseup="message = `Salvar`"
+      @dblclick="value = true, warning = false, message = `Editar`">
+      {{ message }}
+    </button>
+
+    <small class="text-xs lg:text-base font-mono text-pink-800" v-show="warning">
+      Clique duas vezes no botão para salvar as alterações.
+    </small>
   </section>
 </template>
 
@@ -72,10 +65,10 @@ const users = ref([])
 
 onMounted(() => {
   users.value = [
-    { name: 'Menina da Silva', company: 'E-Inov Soluções Tecnológicas', email: 'menina.silva@example.com', telephone: '88-0200-0200, 88-0201-0201', data: '2022-01-05' },
-    { name: 'Beltrano da Silva', company: 'E-Inov Soluções Tecnológicas', email: 'beltrano.silva2@example.com', telephone: '89-1111-1111', data: '2022-01-16' },
-    { name: 'Siclano da Silva', company: 'E-Inov Soluções Tecnológicas', email: 'siclano.silva3@example.com', telephone: '91-2222-2222', data: '2022-01-27' },
-    { name: 'Fulano da Silva', company: 'E-Inov Soluções Tecnológicas', email: 'fulano.silva4@example.com', telephone: '92-3333-3333', data: '2022-02-09' },
+    { name: 'Menina da Silva', company: 'E-Inov Soluções Tecnológicas', email: 'menina.silva@example.com', telephone: '88-0200-0200, 88-0201-0201', date: '2022-01-05' },
+    { name: 'Beltrano da Silva', company: 'E-Inov Soluções Tecnológicas', email: 'beltrano.silva2@example.com', telephone: '89-1111-1111', date: '2022-01-16' },
+    { name: 'Siclano da Silva', company: 'E-Inov Soluções Tecnológicas', email: 'siclano.silva3@example.com', telephone: '91-2222-2222', date: '2022-01-27' },
+    { name: 'Fulano da Silva', company: 'E-Inov Soluções Tecnológicas', email: 'fulano.silva4@example.com', telephone: '92-3333-3333', date: '2022-02-09' },
   ]
 
   setUsers

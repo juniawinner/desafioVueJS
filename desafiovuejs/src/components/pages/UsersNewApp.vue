@@ -93,21 +93,23 @@ let nameForm = ref()
 let emailForm = ref()
 let telephoneForm = ref()
 let companyForm = ref()
-let usersData = ref([{ nameForm, emailForm, telephoneForm, companyForm }])
+
+let date = new Date()
+let year = date.getFullYear()
+let month = ('0' + (date.getMonth() + 1)).slice(-2)
+let day = ('0' + date.getDate()).slice(-2)
+let currentDate = year + '-' + month + '-' + day
+
+let usersData = ref([{ nameForm, emailForm, telephoneForm, companyForm, currentDate }])
 let currentUsers = ref()
 
 function persist() {
-    if (!localStorage.getItem(usersData.value)) {
-        populateStorage()
-    } else {
-        setUsers()
-    }
+    populateStorage()
 }
 
 function populateStorage() {
     let parsed = JSON.stringify(usersData.value)
     localStorage.setItem('users', parsed)
-
     setUsers()
 }
 
