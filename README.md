@@ -5,10 +5,6 @@
 <img src="https://img.shields.io/github/stars/juniawinner/desafioVueJS?style=plastic" alt="Badge Stars on GitHub">
 </p>
 
-<h3 align="center">
-<a href="https://jolly-water-0984cf60f.1.azurestaticapps.net" title="Desafio Vue.js">Site do projeto</a>
-</h3>
-
 # 📜 Índice
 
 1. [Sobre o projeto](#-sobre-o-projeto)
